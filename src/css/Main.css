@@ -1,3 +1,11 @@
+.tabs__root {
+    background: #fff;
+}
+
+.Main-tabRoot-4  {
+    margin: 0 5px !important;
+}
+
 .product__card {
     width: 100%;
     border-bottom: solid 1px #aaa;

@@ -14,14 +14,15 @@ function TabContainer(props) {
 const styles = theme => ({
 	root: {
 		flexGrow: 1,
-		width: "100%",
-		backgroundColor: theme.palette.background.paper
+		width: "100%"
 	},
 	tabsRoot: {
+		margin: "0",
 		borderBottom: "1px solid #e8e8e8"
 	},
 	tabsIndicator: {
-		backgroundColor: "#fff"
+		backgroundColor: "#fff",
+		visibility: "hidden"
 	},
 	tabRoot: {
 		color: "#fff",
@@ -46,14 +47,35 @@ const styles = theme => ({
 			opacity: 1
 		},
 		"&$tabSelected": {
-			color: "#fff",
-			fontWeight: theme.typography.fontWeightMedium
+			color: "#fff"
 		},
 		"&:focus": {
 			color: "#fff"
 		}
 	}
 });
+
+const renderTab = props => {
+	console.log(props);
+
+	return (
+		<div
+			style={{
+				backgroundImage: `url(${props.img})`,
+				backgroundSize: "cover",
+				borderRadius: "4px",
+				width: "160px",
+				height: "65px",
+				marginLeft: "5px",
+				textTransform: "uppercase",
+				padding: "0 15px"
+			}}
+			{...props}
+		>
+			{props.title}
+		</div>
+	);
+};
 
 class Main extends Component {
 	state = {
@@ -131,6 +153,7 @@ class Main extends Component {
 						onChange={this.handleChange}
 						variant="scrollable"
 						scrollButtons="off"
+						className="tabs__root"
 						classes={{
 							root: classes.tabsRoot,
 							indicator: classes.tabsIndicator
@@ -140,7 +163,9 @@ class Main extends Component {
 							<Tab
 								key={index}
 								disableRipple
-								label={category.category_name}
+								component={renderTab}
+								title={category.category_name}
+								img={category.category_image}
 								classes={{
 									root: classes.tabRoot,
 									selected: classes.tabSelected
